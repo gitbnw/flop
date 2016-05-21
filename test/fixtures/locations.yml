@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  participant: false
+  longitude: MyString
+  latitude: MyString
+
+two:
+  participant: false
+  longitude: MyString
+  latitude: MyString
