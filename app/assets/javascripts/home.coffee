@@ -3,21 +3,20 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).on "page:change", ->
-
-  console.log 'home.cofee loaded'
-
-  x = document.getElementById('demo')
-
-  saveCurrentPosition = (position) ->
-    api_url = "../api/v1/users/update"
-    $.ajax
-      url:  api_url
-      type: "POST"
-      data: {position}
-      dataType: "json"
-      error: (jqXHR, textStatus, errorThrown) ->
-      console.log "AJAX Error: #{errorThrown}"
-      success: (data, textStatus, jqXHR) ->
+    
+    console.log 'home.cofee loaded'
+    
+    x = document.getElementById('demo')
+    
+    saveCurrentLocation = (position) ->
+        $.ajax
+          url:  api_url
+          type: "POST"
+          data: {id, position}
+          dataType: "json"
+          error: (jqXHR, textStatus, errorThrown) ->
+             console.log "AJAX Error: #{errorThrown}"
+          success: (data, textStatus, jqXHR) ->
 
     showPosition = (position) ->
       x.innerHTML = 'Latitude: ' + position.coords.latitude +

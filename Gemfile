@@ -55,8 +55,11 @@ gem 'execjs', '~> 2.7'
 gem 'less-rails', '~> 2.7', '>= 2.7.1'
 gem 'railties', '~> 4.2', '>= 4.2.6'
 gem 'therubyracer', '~> 0.12.2'
-
 gem 'twitter-bootswatch-rails', '~> 3.3'
 gem 'twitter-bootswatch-rails-fontawesome', '~> 4.3'
-
 gem 'twitter-bootswatch-rails-helpers'
+
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'

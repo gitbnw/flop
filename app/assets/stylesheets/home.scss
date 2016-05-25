@@ -1,3 +1,33 @@
 // Place all the styles related to the Home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.google-logo {
+    display: block !important;
+  text-indent: -9999px;
+  width: 54px;
+  height: 54px;
+  background-image: image-url('new-google-favicon.svg');
+  background-size: 54px 54px;
+  margin: 0  auto;
+}
+
+.fb-logo {
+    display: block !important;
+  text-indent: -9999px;
+  width: 54px;
+  height: 54px;
+  background-image: image-url('FB-f-Logo__blue_58.png');
+  background-size: 54px 54px;
+  margin: 0  auto;
+}
+
+.twitter-logo {
+    display: block !important;
+  text-indent: -9999px;
+  width: 54px;
+  height: 54px;
+  background-image: image-url('TwitterLogo.png');
+  background-size: 54px 54px;
+  margin: 0  auto;
+}
