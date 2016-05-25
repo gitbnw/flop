@@ -12,7 +12,7 @@ $(document).on "page:change", ->
         $.ajax
           url:  api_url
           type: "POST"
-          data: {position}
+          data: {id, position}
           dataType: "json"
           error: (jqXHR, textStatus, errorThrown) ->
              console.log "AJAX Error: #{errorThrown}"
