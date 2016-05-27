@@ -5,28 +5,36 @@
 $(document).on "page:change", ->
     
     console.log 'home.cofee loaded'
-    
-    x = document.getElementById('demo')
-    
-    saveCurrentLocation = (position) ->
+    user_id = $('#user').data("user").id
+    saveCurrentLocation = (user_position) ->
+        position = user_position.coords.latitude + ", " + user_position.coords.longitude
+        user_update_url = "../api/v1/users/" + user_id 
+        google_locate_url = '../home/address'
         $.ajax
-          url:  api_url
-          type: "POST"
-          data: {id, position}
-          dataType: "json"
+          url:  user_update_url
+          type: 'PUT', 
+          data: {"user": {"position": position}},
           error: (jqXHR, textStatus, errorThrown) ->
-             console.log "AJAX Error: #{errorThrown}"
+            console.log "AJAX Error: #{errorThrown}"
           success: (data, textStatus, jqXHR) ->
+            console.log data
+            $.ajax
+              url:  google_locate_url
+              type: 'PUT', 
+              data: {"id": user_id},
+              error: (jqXHR, textStatus, errorThrown) ->
+                console.log "AJAX Error: #{errorThrown}"
+              success: (data, textStatus, jqXHR) ->            
 
-    showPosition = (position) ->
-      x.innerHTML = 'Latitude: ' + position.coords.latitude +
-      '<br>Longitude: ' + position.coords.longitude
-      return
-
-    @getLocation = ->
+    getLocation = ->
       if navigator.geolocation
-        navigator.geolocation.getCurrentPosition showPosition
         navigator.geolocation.getCurrentPosition saveCurrentLocation
       else
         x.innerHTML = 'Geolocation is not supported by this browser.'
       return
+      
+    $('#geo-link').click (event) ->
+      getLocation()
+      event.preventDefault()
+      # Prevent link from following its href
+      return     

@@ -1,40 +1,51 @@
 <div class="row">
-  <div class="col-md-5">
-  <h3>Log in with your Belly account</h3>
-  
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <div class="form-group">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, class: "form-control" %>
-    </div>
-  
-    <div class="form-group">
-      <%= f.label :password %><br />
-      <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
-    </div>
-    
-    <div class="form-group">
-    <% if devise_mapping.rememberable? -%>
-      
-        <%= f.check_box :remember_me %>
-        <%= f.label :remember_me %>
+  <div class="row-height">
+    <div class="col-md-5 col-md-height">
+      <div class="inside">
+        <h3><div class="text-center">Use your Belly to Flop</div></h3>
         
-    <% end -%>
-        <%= link_to "Forgot your password?", new_password_path(resource_name), class: "pull-right" %>
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <div class="form-group">
+            <%= f.label :email %><br />
+            <%= f.email_field :email, autofocus: true, class: "form-control" %>
+          </div>
+        
+          <div class="form-group">
+            <%= f.label :password %><br />
+            <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+          </div>
+          
+          <div class="form-group">
+          <% if devise_mapping.rememberable? -%>
+            
+              <%= f.check_box :remember_me %>
+              <%= f.label :remember_me %>
+              
+          <% end -%>
+              <%= link_to "Forgot your password?", new_password_path(resource_name), class: "pull-right" %>
+          </div>
+          
+          <div class="actions">
+            <%= f.submit "Log in", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
     </div>
     
-    <div class="actions">
-      <%= f.submit "Log in", class: "btn btn-primary" %>
+    <div class="col-md-1 text-center col-md-height valign-middle">
+      <div class="inside">
+        <h3 class="text-muted">OR</h3>
+      </div>
     </div>
-  <% end %>
-  
-  </div>
-  <div class="col-md-6 col-md-offset-1 text-center">
-    <h3>Log in with Facebook, Google, or Twitter</h3>
-      <%- resource_class.omniauth_providers.each do |provider| %>
-          <%= link_to omniauth_authorize_path(resource_name, provider), class: "btn btn-default" do %>
-              <% content_tag(:i, nil, class: "fa fa-2x #{omniauth_icon_for(provider)}") %>
-          <% end %>
-      <% end -%>
+    <div class="col-md-6 text-center col-md-height">
+      <div class="inside">
+        <h3>Flop with Facebook, Google, or Twitter</h3>
+          <%- resource_class.omniauth_providers.each do |provider| %>
+              <%= link_to omniauth_authorize_path(resource_name, provider), class: "btn btn-default" do %>
+                  <% content_tag(:i, nil, class: "fa fa-2x #{omniauth_icon_for(provider)}") %>
+              <% end %>
+          <% end -%>
+      </div>
+    </div>
   </div>
 </div>

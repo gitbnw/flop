@@ -8,10 +8,12 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :locations, only: [:index, :show]
+      resources :users
     end
   end
 
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
+
+  put '/home/address', to: 'home#address'
   
 end

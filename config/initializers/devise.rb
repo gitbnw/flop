@@ -277,5 +277,9 @@ config.secret_key = ENV['DEVISE_SECRET_KEY'] if Rails.env.production?
     access_type: "offline", 
     approval_prompt: ""
   }
-
+  config.omniauth :twitter, ENV["TWITTER_KEY"], ENV["TWITTER_SECRET"], {
+    scope: "email",
+    access_type: "offline", 
+    approval_prompt: ""
+  }
 end

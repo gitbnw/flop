@@ -3,5 +3,8 @@
  *= require_self
  *= require cerulean/loader
  *= require cerulean/bootswatch
+ *= require fontawesome
+ *= require application
  *= require home
+ *= require responsive_columns
 */
