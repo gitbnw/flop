@@ -7,21 +7,23 @@ module Google
         base_uri 'https://maps.googleapis.com/maps/api/place/'
 
         def self.get_nearby_places(position, radius, api_key = API_KEY)
-            get("/nearbysearch/json?location=#{position}&radius=#{radius}&key=#{api_key}")
+            response = get("/nearbysearch/json?location=#{position}&radius=#{radius}&key=#{api_key}")
         end
 
         def self.get_place_details(placeid, api_key = API_KEY)
             get("/details/json?placeid=#{placeid}&key=#{api_key}")
         end
     end
-    
+
     class GeocodeAPI
         include HTTParty
         base_uri 'https://maps.googleapis.com/maps/api/geocode/'
-        
+
         def self.get_address(position, api_key = API_KEY)
-            get("/nearbysearch/json?latlng=#{position}&key=#{api_key}")
-        end       
-        
+          puts "position:" + " " + "#{position}"
+          response = get("/json?latlng=#{position}&key=#{api_key}")
+          raise response.inspect
+        end
+
     end
 end

@@ -8,22 +8,19 @@
                 <span class="input-group-btn">
                     <%= link_to '/', class: "btn btn-default geo-link", :id => "geo-link" do %>
                         <% content_tag(:i, nil, class: "fa fa-location-arrow") %>
-                    <% end %>                      
-                </span>      
+                    <% end %>
+                </span>
                 <label class="sr-only">Search</label>
-                <input placeholder="123 Main Street or 63131" class="form-control search-field"></input>
+                <input placeholder="123 Main Street or 63131" class="form-control search-field" id="address-input"></input>
                 <span class="input-group-btn">
                   <button type="submit" class="search-submit btn btn-default">Search</button>
-                </span>                
+                </span>
             </div>
             </form>
         </div>
     </div>
         <p id="demo"></p>
-        
+
 <%= content_tag "div", id: "user", data: {user: @user} do %>
 
 <% end %>
-
-
-

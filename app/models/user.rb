@@ -1,14 +1,14 @@
 class User < ActiveRecord::Base
-  
+
   TEMP_EMAIL_PREFIX = 'change@me'
   TEMP_EMAIL_REGEX = /\Achange@me/
-  
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable, :omniauthable,
     :omniauth_providers => [:facebook, :google_oauth2, :twitter]
-    
+
   validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
   def self.find_for_oauth(auth, signed_in_resource = nil)
 
@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
       # Get the existing user by email if the provider gives us a verified email.
       # If no verified email was provided we assign a temporary email and ask the
       # user to verify it on the next step via UsersController.finish_signup
-      
+
       #email_is_verified = auth.info.email && (auth.info.verified || auth.info.verified_email)
       email = auth.info.email # if email_is_verified don't care
       user = User.where(:email => email).first if email
@@ -56,8 +56,9 @@ class User < ActiveRecord::Base
   def email_verified?
     self.email && self.email !~ TEMP_EMAIL_REGEX
   end
-  
+
   def reverse_geocode
+    puts self.inspect
     Google::GeocodeAPI.get_address(self.position)
   end
 
