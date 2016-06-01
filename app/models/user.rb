@@ -57,9 +57,8 @@ class User < ActiveRecord::Base
     self.email && self.email !~ TEMP_EMAIL_REGEX
   end
 
-  def reverse_geocode
-    puts self.inspect
-    Google::GeocodeAPI.get_address(self.position)
+  def reverse_geocode_address
+    Google::GeocodeAPI.request_address(self.position)
   end
 
 end

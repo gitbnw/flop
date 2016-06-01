@@ -10,7 +10,6 @@
         sign_in(@user == current_user ? @user : current_user, :bypass => true)
         # format.html { redirect_to @user, notice: 'Your profile was successfully updated.' }
         format.json { render json: @user }
-        raise @user.inspect
       else
         # format.html { render action: 'edit' }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -25,12 +24,7 @@
     end
 
     def user_params
-      puts params
-      params.slice!(:user)
-      puts params
-      params.slice!(:position)
-      puts params
-      params.permit(:position)
+      params.require(:user).permit(:position)
     end
 
  end

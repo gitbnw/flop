@@ -8,7 +8,6 @@ $(document).on "page:change", ->
   saveCurrentLocation = (user_position) ->
     position = user_position.coords.latitude + ", " +
     user_position.coords.longitude
-    console.log(position)
     user_update_url = "../api/v1/users/" + user_id
     google_locate_url = '../home/address'
     $.ajax

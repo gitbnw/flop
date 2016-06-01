@@ -8,9 +8,8 @@ class HomeController < ApplicationController
 
     def address
       @user = User.find(params[:id])
-      @address = @user.reverse_geocode
-
-        raise @address.inspect
+      @formatted_address = @user.reverse_geocode_address
+      raise
     end
 
     private
