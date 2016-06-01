@@ -13,11 +13,10 @@ $(document).on "page:change", ->
     $.ajax
       url: user_update_url
       type: 'PUT',
-      data: {"user": {"position": position}},
+      data: {"user": {"position": position}}, #denest position
       error: (jqXHR, textStatus, errorThrown) ->
         console.log "AJAX Error: #{errorThrown}"
       success: (data, textStatus, jqXHR) ->
-        console.log data
         $.ajax
           url: google_locate_url
           type: 'PUT',
@@ -26,6 +25,7 @@ $(document).on "page:change", ->
             console.log "AJAX Error: #{errorThrown}"
           success: (data, textStatus, jqXHR) ->
             console.log(data)
+            $('#address-input').val(data.formatted_address)
 
   getLocation = ->
     if navigator.geolocation

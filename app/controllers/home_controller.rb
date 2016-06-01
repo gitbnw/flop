@@ -7,9 +7,11 @@ class HomeController < ApplicationController
     end
 
     def address
+
       @user = User.find(params[:id])
       @formatted_address = @user.reverse_geocode_address
-      raise
+      render json: {formatted_address: @formatted_address}
+      
     end
 
     private
