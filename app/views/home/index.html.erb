@@ -1,23 +1,22 @@
-
-
     <p>Let's find some Belly member shops.</p>
     <div class="row">
         <div class="col-md-8">
-            <form role="search" method="get" class="search-form" remote="true">
-              <!-- rails form helper -->
-            <div class="input-group full-width">
-                <span class="input-group-btn">
-                    <%= link_to '/', class: "btn btn-default geo-link", :id => "geo-link" do %>
-                        <% content_tag(:i, nil, class: "fa fa-location-arrow") %>
-                    <% end %>
-                </span>
-                <label class="sr-only">Search</label>
-                <input placeholder="123 Main Street or 63131" class="form-control search-field" id="address-input"></input>
-                <span class="input-group-btn">
-                  <button type="submit" class="search-submit btn btn-default">Search</button>
-                </span>
-            </div>
-            </form>
+            <%= form_tag locations_path, :method => "GET", :class => "search-form", :id => "address-search", remote: true do %>
+                <div class="input-group full-width">
+                    <span class="input-group-btn">
+                        <%= link_to '/', class: "btn btn-default geo-link", :id => "geo-link" do %>
+                            <% content_tag(:i, nil, class: "fa fa-location-arrow") %>
+                        <% end %>
+                    </span>
+                    <label class="sr-only">Search</label>
+                    <input name="position" hidden id="input-geo"></input>
+                    <input name="address" placeholder="123 Main Street or 63131" class="form-control search-field" id="address-input"></input>
+                    <span class="input-group-btn">
+                      <button type="submit" class="search-submit btn btn-default">Search</button>
+                    </span>
+                </div>
+            <% end %>          
+
         </div>
     </div>
         <p id="demo"></p>

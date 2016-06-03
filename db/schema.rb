@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160525172146) do
+ActiveRecord::Schema.define(version: 20160602154218) do
 
   create_table "identities", force: :cascade do |t|
     t.integer  "user_id"
@@ -27,8 +27,13 @@ ActiveRecord::Schema.define(version: 20160525172146) do
     t.boolean  "participant"
     t.string   "longitude"
     t.string   "latitude"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.string   "name"
+    t.string   "types",       default: "--- []\n"
+    t.string   "place_id"
+    t.string   "open_now"
+    t.string   "icon"
   end
 
   create_table "users", force: :cascade do |t|

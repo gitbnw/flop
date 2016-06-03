@@ -5,17 +5,18 @@ module Google
     class PlacesAPI
         include HTTParty
         base_uri 'https://maps.googleapis.com/maps/api/place/'
-
-        def get_nearby_places
-            get("/nearbysearch/json?location=#{@position}&radius=#{@radius}&key=#{@api_key}")
+        # https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=500&type=restaurant&name=cruise&key=YOUR_API_KEY
+        def self.get_nearby_places
+            get("/nearbysearch/json?location=#{@position}&radius=#{@radius}&rankyby=distance&key=#{@api_key}")
         end
 
-        def check_nearby_places
-            response = get_nearby_places(@position, @radius, @api_key)
-            response["position"].nil? ? raise : response
+        def self.check_nearby_places
+            response = get_nearby_places
+            response
+            # puts response["position"].nil? ? response : response
         end
 
-        def self.request_nearby_places(position, radius)
+        def self.request_nearby_places(position, radius = 1609)
             @position = position
             @radius = radius
             @api_key = API_KEY
@@ -27,6 +28,7 @@ module Google
             response = get("/details/json?placeid=#{placeid}&key=#{api_key}")
             raise response.inspect
         end
+        
     end
 
     class GeocodeAPI

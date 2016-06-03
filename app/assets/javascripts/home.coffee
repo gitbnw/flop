@@ -2,7 +2,6 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $(document).on "page:change", ->
-  console.log 'home.cofee loaded'
   user_id = $('#user').data("user").id
 
   saveCurrentLocation = (user_position) ->
@@ -17,6 +16,7 @@ $(document).on "page:change", ->
       error: (jqXHR, textStatus, errorThrown) ->
         console.log "AJAX Error: #{errorThrown}"
       success: (data, textStatus, jqXHR) ->
+        $('#input-geo').val(position)
         $.ajax
           url: google_locate_url
           type: 'PUT',
@@ -24,9 +24,11 @@ $(document).on "page:change", ->
           error: (jqXHR, textStatus, errorThrown) ->
             console.log "AJAX Error: #{errorThrown}"
           success: (data, textStatus, jqXHR) ->
-            console.log(data)
             $('#address-input').val(data.formatted_address)
-
+            $( "#address-search" ).trigger( "submit" );
+  
+  
+            
   getLocation = ->
     if navigator.geolocation
       navigator.geolocation.getCurrentPosition saveCurrentLocation
