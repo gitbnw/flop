@@ -25,10 +25,10 @@ $(document).on "page:change", ->
             console.log "AJAX Error: #{errorThrown}"
           success: (data, textStatus, jqXHR) ->
             $('#address-input').val(data.formatted_address)
-            $( "#address-search" ).trigger( "submit" );
+            $( "#address-search" ).trigger("submit")
   
-  
-            
+
+
   getLocation = ->
     if navigator.geolocation
       navigator.geolocation.getCurrentPosition saveCurrentLocation
