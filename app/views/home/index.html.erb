@@ -1,7 +1,8 @@
+   <div class="jumbotron">
     <p>Let's find some Belly member shops.</p>
     <div class="row">
         <div class="col-md-8">
-            <%= form_tag locations_path, :method => "GET", :class => "search-form", :id => "address-search", remote: true do %>
+            <%= form_tag search_path, :method => "GET", :class => "search-form", :id => "address-search", remote: true do %>
                 <div class="input-group full-width">
                     <span class="input-group-btn">
                         <%= link_to '/', class: "btn btn-default geo-link", :id => "geo-link" do %>
@@ -9,8 +10,8 @@
                         <% end %>
                     </span>
                     <label class="sr-only">Search</label>
-                    <input name="position" hidden id="input-geo"></input>
-                    <input name="address" placeholder="123 Main Street or 63131" class="form-control search-field" id="address-input"></input>
+                    <%= hidden_field(:search, :position) %>
+                    <%= text_field(:search, :address, class: "form-control search-field", placeholder: "123 Main Street or 63131") %>
                     <span class="input-group-btn">
                       <button type="submit" class="search-submit btn btn-default">Search</button>
                     </span>
@@ -23,4 +24,11 @@
 
 <%= content_tag "div", id: "user", data: {user: @user} do %>
 
+<% end %>
+</div>
+<%= content_tag "div", id: "locations_list" do %>
+    <%= content_tag "div", id: "list_header" do %>
+    <% end %>
+    <%= content_tag "div", id: "locations" do %>
+    <% end %>
 <% end %>

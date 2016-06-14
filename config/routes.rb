@@ -16,8 +16,8 @@ Rails.application.routes.draw do
   
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
 
-  match '/search' => 'api/v1/locations#search', via: :get, :as => :locations_search
-  
   put '/home/address', to: 'home#address'
+  
+  match '/search' => 'search#index', via: :get
   
 end

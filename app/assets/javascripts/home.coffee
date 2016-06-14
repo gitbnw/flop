@@ -16,7 +16,8 @@ $(document).on "page:change", ->
       error: (jqXHR, textStatus, errorThrown) ->
         console.log "AJAX Error: #{errorThrown}"
       success: (data, textStatus, jqXHR) ->
-        $('#input-geo').val(position)
+        location = {}
+        $('#search_position').val(position)
         $.ajax
           url: google_locate_url
           type: 'PUT',
@@ -24,7 +25,7 @@ $(document).on "page:change", ->
           error: (jqXHR, textStatus, errorThrown) ->
             console.log "AJAX Error: #{errorThrown}"
           success: (data, textStatus, jqXHR) ->
-            $('#address-input').val(data.formatted_address)
+            $('#search_address').val(data.formatted_address)
             $( "#address-search" ).trigger("submit")
   
 
