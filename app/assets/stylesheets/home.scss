@@ -31,3 +31,78 @@
   background-size: 54px 54px;
   margin: 0  auto;
 }
+
+#locations_list {
+    width: 60%;
+    float:left;
+}
+
+.results-row {
+   border-top: 1px solid silver;
+}
+
+.results-row .location {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    height: 75px; 
+    line-height: 70px;     
+}
+.results-row .location_address {
+    table-layout: fixed;
+    max-height: 75px; 
+    line-height: 70px; 
+}
+
+.results-row .location_address .address_row {
+    display: table-row;
+}
+
+.results-row .location_street,
+{
+    height: 37px;
+    line-height: 20px;  
+    display: table-cell;
+    vertical-align: bottom;
+};
+
+.results-row .location_city {
+    height: 37px;
+    line-height: 20px;  
+   display: table-cell;
+   vertical-align: top;
+   padding-bottom: 12px;
+}
+
+.results-row .location_dist {
+    float:right;
+}
+
+.results-row .location_checkin {
+    float:right;
+}
+.results-row .location_checkin a {
+
+}
+
+.col-centered {
+    float:none;
+    margin: 0 auto;
+}
+.jumbotron.search {
+    -webkit-transition: padding 1s; /* For Safari 3.1 to 6.0 */
+    transition: padding 1s;
+}
+
+.jumbotron.search.results {
+    padding-top:6px;
+    padding-bottom:6px;
+}
+
+
+#map {
+    width: 35%;
+    height: 600px;
+    float:right; 
+    
+}

@@ -1,57 +1,39 @@
 class Location
     include Google
 
-    attr_accessor :name, :participant, :longitude, :latitude, :types, :place_id, :open_now, :icon, :price_level, :rating, :icon, :distance
+    attr_accessor :name, :longitude, :latitude, :type, :open_now, :icon, :distance, :street_address, :city_st_address
 
     def initialize response_location
       @name = response_location["name"]
-      @particpant = [true, false].sample
-      @place_id = response_location["place_id"]
-      @types = response_location["types"]
-      unless response_location["opening_hours"].nil? 
-        @open_now = response_location["opening_hours"]["open_now"]
+      @type = response_location["categories"][0]["name"]
+      @url = response_location["url"]
+      @street_address = "#{response_location["location"]["address"]}"
+      @city_st_address = "#{response_location["location"]["city"]}, #{response_location["location"]["state"]}"
+      @longitude = response_location["location"]["lng"]
+      @latitude = response_location["location"]["lat"]
+      @distance = (response_location["location"]["distance"] * 0.00062137).round(2)
+      if response_location["hasMenu"]
+        @menu = response_location["menu"]["url"]
       end
-      @price_level = response_location["price_level"]
-      @rating = response_location["rating"]
-      @icon = response_location["icon"]
-      @icon = assign_assign(response_location["types"])
-    end
-
-    def self.search(location_params)
-        @locations = request_by(location_params)
-    end
-
-    def self.request_by(location_params)
-        Google::PlacesAPI.request_nearby_places(location_params[:position])
+      @icon = "#{response_location["categories"][0]["icon"]["prefix"]}bg_32#{response_location["categories"][0]["icon"]["suffix"]}"
     end
 
     def self.apply_response(response_locations)
       locations_array = []
-      response_locations["results"].each do |response_location|
-        if (response_location["types"] & ["restaurant", "shop", "store", "food", "bar", "lodging"]).any?
+
+      response_locations["response"]["venues"].each do |response_location|
           locations_array << Location.new(response_location)
-        end
       end
-        return locations_array
-    end
-    
-    def self.request_distances_by location_params, destinations_array
-      Google::DistanceMatrixAPI.request_distance(location_params[:address], destinations_array)
+        return locations_array.sort_by { |loc| loc.distance }
     end
     
     def self.request_position_by address
       Google::GeocodeAPI.request_position(address)
     end    
-    
-    def self.apply_distances locations_array, distance_object
-      locations_array.each do |location|
-        distance_object.select{|k, v| location.distance = v["distance"]["text"] if location.place_id == k}
-      end
-    end
+  
     
     def self.request_by search_params
-      Google::PlacesAPI.request_nearby_places(search_params)
-      # Google::GeocodeAPI.request_by(location_params)
+      Foursquare::SearchAPI.request_nearby_places(search_params)
     end
     
 end

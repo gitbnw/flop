@@ -1,6 +1,16 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
+<%
+imgs = {}
+Dir.chdir("#{Rails.root}/app/assets/images/") do
+  imgs = Dir["**"].inject({}) {|h,f| h.merge! f => image_path(f)}
+end
+%>
+
+window.image_path = (name) ->
+  <%= imgs.to_json %>[name]
+
 $(document).on "page:change", ->
   user_id = $('#user').data("user").id
 
@@ -27,8 +37,6 @@ $(document).on "page:change", ->
           success: (data, textStatus, jqXHR) ->
             $('#search_address').val(data.formatted_address)
             $( "#address-search" ).trigger("submit")
-  
-
 
   getLocation = ->
     if navigator.geolocation
@@ -42,3 +50,31 @@ $(document).on "page:change", ->
      event.preventDefault()
     # Prevent link from following its href
      return
+
+@initMap = (init_map_parameters)->
+  position = init_map_parameters["search_position"].split(",")
+  myLatLng = 
+    lat: parseFloat position[0]
+    lng: parseFloat position[1]
+  map = new (google.maps.Map)(document.getElementById('map'),
+    zoom: 13
+    center: myLatLng)
+  marker = new (google.maps.Marker)(
+    position: myLatLng
+    map: map
+    icon: image_path('icon-109572_32.jpg')
+    title: 'You!')
+  createMarker(location, map) for location in init_map_parameters["locations_array"]  
+  return
+  
+createMarker = (location, map) ->
+  console.log location
+  LatLng =
+    lat: location["latitude"]
+    lng: location["longitude"]
+  marker = new (google.maps.Marker)(
+    position: LatLng
+    map:map
+    icon: location["icon"]
+    title: location["name"])
+  return

@@ -1,11 +1,19 @@
 $list_header = $('#list_header')
 $locations_div = $('#locations')
+$map_div = $('#map')
 
 $locations_div.html('<div>')
+<% #stop = @page * 10 %>
+<% #start = stop - 9 %>
 <% @locations.each do |location| %>
     <% @location = location %>
     $locations_div.append('<%= j render "location", object: @location %>')
 <% end %>   
+
 $locations_div.append('</div>')
 $("#search_position").val("");
 $("#search_address").val("<%= @geocode["address"] %>")
+$("#search-intro").html("")
+$(".jumbotron.search").addClass("results")
+
+initMap(<%= raw @init_map_parameters.to_json %>)

@@ -1,11 +1,19 @@
 class SearchController < ApplicationController
 
  def index
-   @locations = Location.apply_distances(new_locations, distance_object)
-   @geocode = request_locations["geocodeObj"]
+  @locations = new_locations
+  @geocode = request_locations["geocodeObj"]
+  @init_map_parameters = {
+      "search_position": @geocode["position"],
+      "locations_array": @locations
+  }
 
-   #render json: {nearby_locations: @locations}
-   render "list"
+    respond_to do |format|
+      format.js { render "list" }
+    end
+    
+    
+    
  end
 
 private
@@ -17,11 +25,6 @@ private
     def new_locations
         Location.apply_response(request_locations["nearbyObj"])
     end
-    
-    def distance_object
-        Location.request_distances_by(search_params, new_locations.map(&:place_id))
-    end
-        
 
     def search_params
      params.require(:search).permit(:position, :address)

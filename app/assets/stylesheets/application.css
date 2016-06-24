@@ -12,6 +12,7 @@
  *
  *
  *= require_self
+ *= require font-awesome
  */
 .valign-middle {
     vertical-align: middle

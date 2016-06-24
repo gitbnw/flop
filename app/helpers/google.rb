@@ -16,18 +16,17 @@ module Google
             responseObj = {
                 "geocodeObj" => @geocodeObj,
                 "nearbyObj" => get_nearby_places
-                
             }
+            raise responseObj["nearbyObj"].inspect
             responseObj
-            # puts response["position"].nil? ? response : response
-            # i need nearby_places & @geocodeObj
+
         end
 
         def self.request_nearby_places(search_params, radius = 8046) # 5 miles
             @radius = radius
             @api_key = API_KEY        
             @geocodeObj = GeocodeAPI.geocode_request_by search_params
-            @position = search_params[:position].empty? ? @geocodeObj["position"] : search_params["position"] # I want this Geocode to return the formatted address too
+            @position = search_params[:position].empty? ? @geocodeObj["position"] : search_params["position"] 
             check_nearby_places
         end
 

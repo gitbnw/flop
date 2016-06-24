@@ -59,7 +59,10 @@ gem 'twitter-bootswatch-rails', '~> 3.3'
 gem 'twitter-bootswatch-rails-fontawesome', '~> 4.3'
 gem 'twitter-bootswatch-rails-helpers'
 
+
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
+
+gem "font-awesome-rails"
